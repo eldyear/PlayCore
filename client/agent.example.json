@@ -1,0 +1,14 @@
+{
+  "server_url": "http://192.168.1.10:8080",
+  "pc_id": 1,
+  "pc_token": "PASTE_TOKEN_FROM_ADMIN_PANEL",
+  "poll_seconds": 2,
+  "low_threshold_minutes": 10,
+  "background_image": "",
+  "games_folder": "",
+  "games": [],
+  "exclude_games": [],
+  "nvidia_command": "",
+  "local_admin_password": "CHANGE_ME_EMERGENCY_PASSWORD",
+  "log_path": ""
+}

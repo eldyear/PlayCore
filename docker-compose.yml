@@ -1,0 +1,40 @@
+services:
+  # ============================================================
+  # Основной сервер (по умолчанию SQLite — одна команда, без БД)
+  # ============================================================
+  app:
+    build: .
+    container_name: game-club
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${PORT:-8080}:8080"
+    volumes:
+      - ./data:/app/data
+
+  # ============================================================
+  # PostgreSQL (опционально). Включить:
+  #   docker compose --profile postgres up -d
+  # и в .env указать:
+  #   DB_DRIVER=postgres
+  #   DATABASE_URL=postgres://gameclub:gameclub@db:5432/gameclub?sslmode=disable
+  # ============================================================
+  db:
+    image: postgres:16-alpine
+    profiles: ["postgres"]
+    container_name: game-club-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-gameclub}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gameclub}
+      POSTGRES_DB: ${POSTGRES_DB:-gameclub}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gameclub}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

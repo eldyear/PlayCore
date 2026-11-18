@@ -1,0 +1,10 @@
+# Не тащим в build-контекст лишнее
+data/
+client/
+easylock
+*.exe
+*.log
+.git
+.gitignore
+.env
+.env.local
