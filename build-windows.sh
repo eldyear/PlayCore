@@ -20,7 +20,7 @@ docker run --rm -v "$PWD":/app -w /app golang:1.24-bookworm sh -c '
   /go/bin/go-winres simply --icon /app/icon.ico --manifest gui --out rsrc --arch amd64
 
   # сборка: без консоли (-H=windowsgui), с иконкой
-  GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags "-s -w -H=windowsgui" -o /app/easylock.exe .
+  GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -buildvcs=false -ldflags "-s -w -H=windowsgui" -o /app/easylock.exe .
 '
 
 echo ""
